@@ -1,0 +1,8 @@
+inherit_from:
+  - https://gitlab.com/bsm/misc/raw/master/rubocop/default.yml
+
+AllCops:
+  TargetRubyVersion: "2.5"
+
+Naming/FileName:
+  Exclude: ["lib/grape-pagy.rb"]
