@@ -56,17 +56,17 @@ describe Grape::Pagy do
     expect(last_response.headers).to include(
       'Current-Page' => '1',
       'Page-Items'   => '10',
-      'Total-Count'  => '12',
+      'Total-Count'  => '13',
       'Total-Pages'  => '2',
     )
     expect(last_response.body).to eq(%([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 
-    get '/sub?items=20'
+    get '/sub?per_page=20'
     expect(last_response.status).to eq(200)
     expect(last_response.headers).to include(
       'Current-Page' => '1',
       'Page-Items'   => '20',
-      'Total-Count'  => '12',
+      'Total-Count'  => '13',
       'Total-Pages'  => '1',
     )
   end
