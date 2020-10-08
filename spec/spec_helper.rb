@@ -11,18 +11,18 @@ class TestAPI < Grape::API
   helpers Grape::Pagy::Helpers
 
   params do
-    use :pagination, items: 5
+    use :pagy, items: 5, max_items: 6
   end
   get '' do
-    paginate (1..12).to_a, max_items: 6
+    pagy (1..12).to_a
   end
 
   resource :sub do
     params do
-      use :pagination
+      use :pagy, items_param: :per_page
     end
     get '/' do
-      paginate (1..12).to_a
+      pagy (1..12).to_a, count: 13
     end
   end
 end

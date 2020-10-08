@@ -36,27 +36,26 @@ class MyApi < Grape::API
     desc 'Return a list of posts.'
     params do
       # This will add two optional params: :page and :items.
-      # The parameter names can be globally configured by adjusting
-      # global Pagy::VARS[:page_param] and Pagy::VARS[:item_param]
-      # settings.
-      use :pagination
+      use :pagy
     end
     get do
       posts = Post.all.order(created_at: :desc)
-      paginate(posts)
+      pagy(posts)
     end
   end
 
   resource :strings do
+    desc 'Supports arrays as well as relations.'
     params do
-      # Override the number items returned, defaults to Pagy::VARS[:items].
-      use :pagination, items: 2
+      # Override defaults by setting Pagy::VARS or by passing options.
+      use :pagy,
+          items_param: :per_page, # Accept per_page=N param to limit items.
+          items: 2,               # If per_page param is blank, default to 2.
+          max_items: 10           # Restrict per_page to maximum 10.
     end
     get do
-      words = %w[an array of words]
-      # This supports array as well as relations.
-      # Allows to override global Pagy::VARS settings.
-      paginate(words, max_items: )
+      words = %w[this is a plain array of words]
+      pagy(words)
     end
   end
 end

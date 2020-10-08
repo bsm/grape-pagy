@@ -8,7 +8,7 @@ require 'pagy/extras/overflow'
 
 module Grape
   module Pagy
-    Pager = Struct.new :request, :params do
+    Wrapper = Struct.new :request, :params do
       include ::Pagy::Backend
 
       def paginate(collection, via: nil, **opts, &block)
@@ -30,13 +30,21 @@ module Grape
     module Helpers
       extend Grape::API::Helpers
 
-      params :pagination do |items: ::Pagy::VARS[:items]|
-        optional ::Pagy::VARS[:page_param], type: Integer, default: 1, desc: 'Page offset to fetch.'
-        optional ::Pagy::VARS[:items_param], type: Integer, default: items, desc: 'Number of items to return per page.'
+      params :pagy do |items: nil, page: nil, **opts|
+        items ||= ::Pagy::VARS[:items]
+        page ||= ::Pagy::VARS[:page]
+        page_param = opts[:page_param] || ::Pagy::VARS[:page_param]
+        items_param = opts[:items_param] || ::Pagy::VARS[:items_param]
+
+        @api.route_setting(:pagy_options, opts)
+        optional page_param, type: Integer, default: page, desc: 'Page offset to fetch.'
+        optional items_param, type: Integer, default: items, desc: 'Number of items to return per page.'
       end
 
-      def paginate(collection, via: nil, **opts)
-        Pager.new(request, params).paginate(collection, via: via, **opts) do |key, value|
+      # @param [Array|ActiveRecord::Relation] collection the collection or relation.
+      def pagy(collection, **opts)
+        defaults = route_setting(:pagy_options) || {}
+        Wrapper.new(request, params).paginate(collection, **defaults, **opts) do |key, value|
           header key, value
         end
       end
