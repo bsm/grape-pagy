@@ -2,6 +2,7 @@ require 'grape'
 require 'pagy'
 require 'pagy/extras/arel'
 require 'pagy/extras/array'
+require 'pagy/extras/countless'
 require 'pagy/extras/headers'
 require 'pagy/extras/items'
 require 'pagy/extras/overflow'
@@ -11,15 +12,15 @@ module Grape
     Wrapper = Struct.new :request, :params do
       include ::Pagy::Backend
 
-      def paginate(collection, via: nil, **opts, &block)
+      def paginate(collection, using: nil, **opts, &block)
         pagy_with_items(opts)
-        via ||= if collection.respond_to?(:arel_table)
-                  :arel
-                elsif collection.is_a?(Array)
-                  :array
-                end
+        using ||= if collection.respond_to?(:arel_table)
+                    :arel
+                  elsif collection.is_a?(Array)
+                    :array
+                  end
 
-        method = [:pagy, via].compact.join('_')
+        method = [:pagy, using].compact.join('_')
         page, scope = send(method, collection, **opts)
 
         pagy_headers(page).each(&block)
