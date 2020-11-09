@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'grape-pagy'
-  spec.version       = '0.2.0'
+  spec.version       = '0.3.0'
   spec.authors       = ['Black Square Media']
   spec.email         = ['info@blacksquaremedia.com']
   spec.description   = 'Pagy paginator for grape API'

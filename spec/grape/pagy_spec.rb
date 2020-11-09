@@ -50,6 +50,25 @@ describe Grape::Pagy do
     expect(last_response.body).to eq(%([]))
   end
 
+  it 'should allow countless mode' do
+    get '/countless?page=2'
+    expect(last_response.status).to eq(200)
+    expect(last_response.headers).to include(
+      'Current-Page' => '2',
+      'Page-Items'   => '3',
+      'Link'         => [
+        %(<http://example.org/countless?page=1>; rel="first"),
+        %(<http://example.org/countless?page=1>; rel="prev"),
+        %(<http://example.org/countless?page=3>; rel="next"),
+      ].join(', '),
+    )
+    expect(last_response.headers).not_to include(
+      'Total-Count',
+      'Total-Pages',
+    )
+    expect(last_response.body).to eq(%([4, 5, 6]))
+  end
+
   it 'should inherit helper' do
     get '/sub'
     expect(last_response.status).to eq(200)

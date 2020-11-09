@@ -7,6 +7,16 @@ require 'rack/test'
 Pagy::VARS[:items] = 10
 Pagy::VARS[:max_items] = 20
 
+class TestArray < Array
+  def limit(num)
+    slice!(0, num)
+  end
+
+  def offset(num)
+    slice!(num..-1)
+  end
+end
+
 class TestAPI < Grape::API
   helpers Grape::Pagy::Helpers
 
@@ -15,6 +25,13 @@ class TestAPI < Grape::API
   end
   get '' do
     pagy (1..12).to_a
+  end
+
+  params do
+    use :pagy, items: 3
+  end
+  get '/countless' do
+    pagy TestArray.new((1..12).to_a), using: :countless
   end
 
   resource :sub do
