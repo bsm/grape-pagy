@@ -5,7 +5,7 @@ describe Grape::Pagy do
 
   let(:app) { TestAPI }
 
-  it 'should paginate' do
+  it 'paginates' do
     get '/'
     expect(last_response.status).to eq(200)
     expect(last_response.headers).to include(
@@ -18,7 +18,7 @@ describe Grape::Pagy do
     expect(last_response.body).to eq(%([1, 2, 3, 4, 5]))
   end
 
-  it 'should accept page and items parameters' do
+  it 'accepts page and items parameters' do
     get '/?page=2&items=3'
     expect(last_response.status).to eq(200)
     expect(last_response.headers).to include(
@@ -30,7 +30,7 @@ describe Grape::Pagy do
     expect(last_response.body).to eq(%([4, 5, 6]))
   end
 
-  it 'should cap items' do
+  it 'caps items' do
     get '/?items=10'
     expect(last_response.headers).to include('Page-Items' => '6')
     expect(last_response.body).to eq(%([1, 2, 3, 4, 5, 6]))
@@ -40,7 +40,7 @@ describe Grape::Pagy do
     expect(last_response.body).to eq(%([1, 2, 3]))
   end
 
-  it 'should ignore overflow' do
+  it 'ignores overflow' do
     get '/?page=99'
     expect(last_response.status).to eq(200)
     expect(last_response.headers).to include(
@@ -50,7 +50,7 @@ describe Grape::Pagy do
     expect(last_response.body).to eq(%([]))
   end
 
-  it 'should allow countless mode' do
+  it 'allows countless mode' do
     get '/countless?page=2'
     expect(last_response.status).to eq(200)
     expect(last_response.headers).to include(
@@ -69,7 +69,7 @@ describe Grape::Pagy do
     expect(last_response.body).to eq(%([4, 5, 6]))
   end
 
-  it 'should inherit helper' do
+  it 'inherits helper' do
     get '/sub'
     expect(last_response.status).to eq(200)
     expect(last_response.headers).to include(
