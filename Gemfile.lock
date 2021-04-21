@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    grape-pagy (0.3.1)
+    grape-pagy (0.4.0)
       grape (>= 1.5)
-      pagy (>= 3.8, < 4.0)
+      pagy (>= 4.2)
 
 GEM
   remote: https://rubygems.org/
@@ -50,7 +50,7 @@ GEM
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.1)
       mustermann (>= 1.0.0)
-    pagy (3.13.0)
+    pagy (4.3.0)
     parallel (1.20.1)
     parser (3.0.1.0)
       ast (~> 2.4.1)
@@ -124,4 +124,4 @@ DEPENDENCIES
   rubocop-bsm
 
 BUNDLED WITH
-   2.1.4
+   2.2.16

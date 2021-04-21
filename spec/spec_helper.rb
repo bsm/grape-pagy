@@ -9,11 +9,11 @@ Pagy::VARS[:max_items] = 20
 
 class TestArray < Array
   def limit(num)
-    slice!(0, num)
+    self.class.new slice(0, num)
   end
 
   def offset(num)
-    slice!(num..-1)
+    self.class.new slice(num..-1)
   end
 end
 
