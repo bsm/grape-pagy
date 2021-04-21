@@ -6,7 +6,7 @@ inherit_mode:
     - Exclude
 
 AllCops:
-  TargetRubyVersion: "2.6"
+  TargetRubyVersion: "3.0"
 
 Naming/FileName:
   Exclude: ["lib/grape-pagy.rb"]

@@ -13,7 +13,7 @@ module Grape
       include ::Pagy::Backend
 
       def paginate(collection, using: nil, **opts, &block)
-        pagy_with_items(opts)
+        opts = pagy_countless_get_vars(nil, opts)
         using ||= if collection.respond_to?(:arel_table)
                     :arel
                   elsif collection.is_a?(Array)
@@ -31,9 +31,9 @@ module Grape
     module Helpers
       extend Grape::API::Helpers
 
-      params :pagy do |items: nil, page: nil, **opts|
-        items ||= ::Pagy::VARS[:items]
-        page ||= ::Pagy::VARS[:page]
+      params :pagy do |opts|
+        items = opts.delete(:items) || ::Pagy::VARS[:items]
+        page = opts.delete(:page) || ::Pagy::VARS[:page]
         page_param = opts[:page_param] || ::Pagy::VARS[:page_param]
         items_param = opts[:items_param] || ::Pagy::VARS[:items_param]
 
@@ -45,6 +45,7 @@ module Grape
       # @param [Array|ActiveRecord::Relation] collection the collection or relation.
       def pagy(collection, **opts)
         defaults = route_setting(:pagy_options) || {}
+
         Wrapper.new(request, params).paginate(collection, **defaults, **opts) do |key, value|
           header key, value
         end
