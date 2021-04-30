@@ -1,6 +1,6 @@
 # Grape::Pagy
 
-[![Build Status](https://travis-ci.org/bsm/grape-pagy.png?branch=master)](https://travis-ci.org/bsm/grape-pagy)
+[![Ruby](https://github.com/bsm/grape-pagy/actions/workflows/ruby.yml/badge.svg)](https://github.com/bsm/grape-pagy/actions/workflows/ruby.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 [Pagy](https://github.com/ddnexus/pagy) pagination for [grape](https://github.com/ruby-grape/grape) API framework.
