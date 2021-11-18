@@ -4,8 +4,8 @@ require 'rspec'
 require 'grape/pagy'
 require 'rack/test'
 
-Pagy::VARS[:items] = 10
-Pagy::VARS[:max_items] = 20
+Pagy::DEFAULT[:items] = 10
+Pagy::DEFAULT[:max_items] = 20
 
 class TestArray < Array
   def limit(num)
