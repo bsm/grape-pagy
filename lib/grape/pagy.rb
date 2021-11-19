@@ -32,10 +32,10 @@ module Grape
       extend Grape::API::Helpers
 
       params :pagy do |opts|
-        items = opts.delete(:items) || ::Pagy::VARS[:items]
-        page = opts.delete(:page) || ::Pagy::VARS[:page]
-        page_param = opts[:page_param] || ::Pagy::VARS[:page_param]
-        items_param = opts[:items_param] || ::Pagy::VARS[:items_param]
+        items = opts.delete(:items) || ::Pagy::DEFAULT[:items]
+        page = opts.delete(:page) || ::Pagy::DEFAULT[:page]
+        page_param = opts[:page_param] || ::Pagy::DEFAULT[:page_param]
+        items_param = opts[:items_param] || ::Pagy::DEFAULT[:items_param]
 
         @api.route_setting(:pagy_options, opts)
         optional page_param, type: Integer, default: page, desc: 'Page offset to fetch.'

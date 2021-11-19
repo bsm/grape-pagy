@@ -10,7 +10,9 @@ describe Grape::Pagy do
     expect(last_response.status).to eq(200)
     expect(last_response.headers).to include(
       'Current-Page' => '1',
-      'Link'         => %(<http://example.org/?page=1>; rel="first", <http://example.org/?page=2>; rel="next", <http://example.org/?page=3>; rel="last"),
+      'Link'         => '<http://example.org/?page=1&items=5>; rel="first", ' \
+                        '<http://example.org/?page=2&items=5>; rel="next", ' \
+                        '<http://example.org/?page=3&items=5>; rel="last"',
       'Page-Items'   => '5',
       'Total-Count'  => '12',
       'Total-Pages'  => '3',
@@ -57,9 +59,9 @@ describe Grape::Pagy do
       'Current-Page' => '2',
       'Page-Items'   => '3',
       'Link'         => [
-        %(<http://example.org/countless?page=1>; rel="first"),
-        %(<http://example.org/countless?page=1>; rel="prev"),
-        %(<http://example.org/countless?page=3>; rel="next"),
+        %(<http://example.org/countless?page=1&items=3>; rel="first"),
+        %(<http://example.org/countless?page=1&items=3>; rel="prev"),
+        %(<http://example.org/countless?page=3&items=3>; rel="next"),
       ].join(', '),
     )
     expect(last_response.headers).not_to include(

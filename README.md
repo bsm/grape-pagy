@@ -47,7 +47,7 @@ class MyApi < Grape::API
   resource :strings do
     desc 'Supports arrays as well as relations.'
     params do
-      # Override defaults by setting Pagy::VARS or by passing options.
+      # Override defaults by setting Pagy::DEFAULT or by passing options.
       use :pagy,
           items_param: :per_page, # Accept per_page=N param to limit items.
           items: 2,               # If per_page param is blank, default to 2.
