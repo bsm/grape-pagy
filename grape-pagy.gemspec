@@ -9,7 +9,6 @@ Gem::Specification.new do |spec|
   spec.license       = 'Apache-2.0'
 
   spec.files         = `git ls-files -z`.split("\x0").reject {|f| f.start_with?('spec/') }
-  spec.test_files    = `git ls-files -z -- spec/*`.split("\x0")
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 3.0'
 
