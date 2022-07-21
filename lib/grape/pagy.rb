@@ -36,10 +36,11 @@ module Grape
         page = opts.delete(:page) || ::Pagy::DEFAULT[:page]
         page_param = opts[:page_param] || ::Pagy::DEFAULT[:page_param]
         items_param = opts[:items_param] || ::Pagy::DEFAULT[:items_param]
+        max_items = opts[:max_items] || ::Pagy::DEFAULT[:max_items]
 
         @api.route_setting(:pagy_options, opts)
         optional page_param, type: Integer, default: page, desc: 'Page offset to fetch.'
-        optional items_param, type: Integer, default: items, desc: 'Number of items to return per page.'
+        optional items_param, type: Integer, default: items, desc: "Number of items to return per page. Maximum value: #{max_items}"
       end
 
       # @param [Array|ActiveRecord::Relation] collection the collection or relation.
