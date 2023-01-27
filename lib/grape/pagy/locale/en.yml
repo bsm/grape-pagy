@@ -1,0 +1,6 @@
+en:
+  grape:
+    pagy:
+      errors:
+        messages:
+          less_than_or_equal_to: "must be less than or equal to %{count}"
