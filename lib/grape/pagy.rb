@@ -31,7 +31,7 @@ module Grape
     module Helpers
       extend Grape::API::Helpers
 
-      params :pagy do |opts|
+      params :pagy do |**opts|
         items = opts.delete(:items) || ::Pagy::DEFAULT[:items]
         page = opts.delete(:page) || ::Pagy::DEFAULT[:page]
         page_param = opts[:page_param] || ::Pagy::DEFAULT[:page_param]

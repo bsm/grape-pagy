@@ -28,6 +28,13 @@ class TestAPI < Grape::API
   end
 
   params do
+    use :pagy
+  end
+  get '/no-opts' do
+    pagy (1..12).to_a
+  end
+
+  params do
     use :pagy, items: 3
   end
   get '/countless' do
