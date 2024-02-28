@@ -54,7 +54,7 @@ GEM
       ast (~> 2.4.1)
       racc
     racc (1.7.1)
-    rack (3.0.8)
+    rack (3.0.9.1)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-test (2.1.0)
